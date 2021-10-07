@@ -3,25 +3,28 @@
 // var sportsAPI = "cd6116b0-264b-11ec-b2e9-e52c4e87d97a"
 
 // var seatGeek = "4a649bd858de54c13c57fa3341d39a5858fd79d148f3fec66b521dea9a881bd1"
-var seatGeekUrl = "https://api.seatgeek.com/2/events?client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0"
-var seatGeek = 
-$("#search").on("click" , function(){
-    var zipcode = $("#Zipput").val()
-    console.log(zipcode)
-})
+var seatGeekUrl = "https://api.seatgeek.com/2/events?geoid=80022&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0"
+var seatGeek =
+    $("#search").on("click", function () {
+        var zipcode = $("#Zipput").val()
+        console.log(zipcode)
 
-$.ajax({
-    type:"GET",
-    url:'https://api.seatgeek.com/2/events?client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0',
-    async:true,
-    dataType: "json",
-    success: function(json) {
+
+        $.ajax({
+            type: "GET",
+            url: 'https://api.seatgeek.com/2/events?geoip=' + zipcode + '&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0',
+            async: true,
+            dataType: "json",
+            success: function (json) {
                 console.log(json);
                 // Parse the response.
                 // Do other things.
-             },
-    error: function(xhr, status, err) {
-        console.log("error")
+            },
+            error: function (xhr, status, err) {
+                console.log("error")
                 // This time, we do not end up here!
-             }
-  });
+            }
+        });
+
+    })
+

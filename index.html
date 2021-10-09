@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title class="title is-1">Kickin' it Back</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/style/style.css">
-  </head>
-  <body>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title class="title is-1">Kickin' it Back</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="./assets/style/style.css">
+</head>
+
+<body>
   <main>
     <section class="hero is-primary is-fullheight">
       <!-- Hero head: will stick at the top -->
@@ -39,44 +41,97 @@
           </div>
         </nav>
       </div>
-      
       <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container has-text-centered">
-          <p id="title" class="title">
+          <p class="title">
             Chillin' With the Homies
+          </p>
+          <p id="today" class="subtitle">
+            Today is:
           </p>
           <p class="subtitle">
             PLan the your fun
             <input class="input is-large is-align-content-center" type="text" placeholder="Enter Your Zip" id="Zipput">
             <button id="search">Search</button>
           </p>
+          <div id="Event-Cards" class="columns">
+            <!-- <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content">$</div>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="column is-one-third">
+              <div class="card">
+                <div class="card-content">
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                  <div class="content"></div>
+                </div>
+              </div>
+            </div>
+            <hr> -->
+          </div>
         </div>
       </div>
-    
       <!-- Hero footer: will stick at the bottom -->
       <div class="hero-foot">
-        <!-- <nav class="tabs">
-          <div class="container">
-            <ul>
-              <li class="is-active"><a>Overview</a></li>
-              <li><a>Modifiers</a></li>
-              <li><a>Grid</a></li>
-              <li><a>Elements</a></li>
-              <li><a>Components</a></li>
-              <li><a>Layout</a></li>
-            </ul>
-          </div>
-        </nav> -->
       </div>
     </section>
   </main>
-  <script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-<script src="./assets/js/script.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+  <script src="./assets/js/script.js"></script>
 </body>
-
-</html>

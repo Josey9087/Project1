@@ -19,6 +19,7 @@ $("#search").on("click", function () {
             console.log(json);
             // Parse the response.
             // Do other things.
+            $('#Event-Cards').empty()
             for (var i = 0; i < 6; i++) {
                 var Next = {
                     Title: json.events[i].short_title,
@@ -30,7 +31,19 @@ $("#search").on("click", function () {
                 localStorage.setItem("Event" + i, JSON.stringify(Next))
                 var AllOptions = JSON.parse(localStorage.getItem("Event" + [i]));
                 console.log(AllOptions.Title)
-
+                $('#Event-Cards').append(`
+                <div class="column is-one-third">
+                  <div class="card">
+                    <div class="card-content">
+                      <div class="content">${AllOptions.Title}</div>
+                      <div class="content">${AllOptions.Address}</div>
+                      <div class="content">${AllOptions.Time}</div>
+                      <div class="content">${"Price: $" + AllOptions.AveragePrice}</div>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                `)
             }
         })
 

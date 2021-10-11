@@ -52,3 +52,20 @@ $("#search").on("click", function () {
             // This time, we do not end up here!
         });
 })
+
+
+// var foursquareID = "IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1"
+// var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
+
+$.ajax({
+  dataType: "json",
+  url: "https://api.foursquare.com/v2/venues/explore?client_id=IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1&client_secret=MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL&near=DEN&v=20180323",
+  data: {},
+  success: function( data ) {
+    // Code for handling API response
+    console.log(data);
+  },
+  error: function(jqXHR, textStatus, errorThrown) {
+    // Code for handling errors
+  }
+});

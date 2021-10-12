@@ -52,3 +52,15 @@ $("#search").on("click", function () {
             // This time, we do not end up here!
         });
 })
+
+// modal
+const Modal = $('.modal')
+const ModalBg = $('.modal-background')
+
+$('#Eventbtn').on("click", function() {
+  Modal.addClass("is-active");
+});
+
+ModalBg.on("click", function(){
+  Modal.removeClass("is-active");
+});

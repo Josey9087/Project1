@@ -6,33 +6,33 @@
 // var seatGeekUrl = "https://api.seatgeek.com/2/events?geoid=80022&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0"
 
 $("#search").on("click", function () {
-    var zipcode = $("#Zipput").val()
-    console.log(zipcode)
+  var zipcode = $("#Zipput").val()
+  console.log(zipcode)
 
-    $.ajax({
-        type: "GET",
-        url: 'https://api.seatgeek.com/2/events?geoip=' + zipcode + '&per_page=6&listing_count.gt=0&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0',
-        async: true,
-        dataType: "json",
-    })
-        .done(function (json) {
-            console.log(json);
-            // Parse the response.
-            // Do other things.
-            $('#Event-Cards').empty()
-            for (var i = 0; i < 6; i++) {
-                var Next = {
-                    Title: json.events[i].short_title,
-                    AveragePrice: json.events[i].stats.average_price,
-                    Type: json.events[i].type,
-                    Address: json.events[i].venue.address + json.events[i].venue.extended_address,
-                    Time: moment(json.events[i].datetime_local).format("dddd, MMMM Do YYYY, h:mm:ss a")
-                };
-                localStorage.setItem("Event" + i, JSON.stringify(Next))
-                var AllOptions = JSON.parse(localStorage.getItem("Event" + [i]));
-                console.log(AllOptions.Title)
-                $('#Event-Cards').append(`
-                <div class="column is-one-third">
+  $.ajax({
+    type: "GET",
+    url: 'https://api.seatgeek.com/2/events?geoip=' + zipcode + '&per_page=6&listing_count.gt=0&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0',
+    async: true,
+    dataType: "json",
+  })
+    .done(function (json) {
+      console.log(json);
+      // Parse the response.
+      // Do other things.
+      $('#Event-Cards').empty()
+      for (var i = 0; i < 6; i++) {
+        var Next = {
+          Title: json.events[i].short_title,
+          AveragePrice: json.events[i].stats.average_price,
+          Type: json.events[i].type,
+          Address: json.events[i].venue.address + json.events[i].venue.extended_address,
+          Time: moment(json.events[i].datetime_local).format("dddd, MMMM Do YYYY, h:mm:ss a")
+        };
+        localStorage.setItem("Event" + i, JSON.stringify(Next))
+        var AllOptions = JSON.parse(localStorage.getItem("Event" + [i]));
+        console.log(AllOptions.Title)
+        $('#Event-Cards').append(`
+                <button id="Pick" class="column is-one-third">
                   <div class="card">
                     <div class="card-content">
                       <div class="content">${AllOptions.Title}</div>
@@ -41,16 +41,61 @@ $("#search").on("click", function () {
                       <div class="content">${"Price: $" + AllOptions.AveragePrice}</div>
                     </div>
                   </div>
-                </div>
+                </button>
                 <hr>
                 `)
-            }
+      }
+      $('#Pick').click(function (event) {
+        $.ajax({
+          type: "GET",
+          dataType: "json",
+          url: "https://api.foursquare.com/v2/venues/explore?client_id=IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1&client_secret=MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL&near=DEN&v=20180323",
+          data: {}
         })
+          .done(function (data) {
+            // Code for handling API response
+            console.log(data);
+          })
+          .fail(function (jqXHR, textStatus, errorThrown) {
 
-        .fail(function (xhr, status, err) {
-            console.log("error")
-            // This time, we do not end up here!
-        });
+
+            // Code for handling errors
+          });
+        tar = event.target
+        $('#Modal').append(`${tar}`)
+        $('#Event-Cards').empty()
+        // var foursquareID = "IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1"
+        // var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
+      })
+    })
+
+    .fail(function (xhr, status, err) {
+      console.log("error")
+      // This time, we do not end up here!
+    });
+})
+
+$('#Pick').click(function () {
+  $.ajax({
+    type: "GET",
+    dataType: "json",
+    url: "https://api.foursquare.com/v2/venues/explore?client_id=IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1&client_secret=MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL&near=DEN&v=20180323",
+    data: {}
+  })
+    .done(function (data) {
+      // Code for handling API response
+      console.log(data);
+    })
+    .fail(function (jqXHR, textStatus, errorThrown) {
+
+
+      // Code for handling errors
+    });
+  React
+  Reply
+
+  // var foursquareID = "IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1"
+  // var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
 })
 
 

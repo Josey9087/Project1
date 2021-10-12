@@ -23,7 +23,7 @@ $("#search").on("click", function () {
       for (var i = 0; i < 6; i++) {
         var Next = {
           Title: json.events[i].short_title,
-          AveragePrice: json.events[i].stats.average_price,
+          Tickets: json.events[i].url,
           Type: json.events[i].type,
           Address: json.events[i].venue.address + json.events[i].venue.extended_address,
           Time: moment(json.events[i].datetime_local).format("dddd, MMMM Do YYYY, h:mm:ss a")
@@ -38,7 +38,7 @@ $("#search").on("click", function () {
                       <div class="content">${AllOptions.Title}</div>
                       <div class="content">${AllOptions.Address}</div>
                       <div class="content">${AllOptions.Time}</div>
-                      <div class="content">${"Price: $" + AllOptions.AveragePrice}</div>
+                      <a id= "links" target = "_blank" href = "${AllOptions.Tickets}" class="content">Tickets</a>
                     </div>
                   </div>
                 </button>
@@ -98,24 +98,6 @@ $('#Pick').click(function () {
   // var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
 })
 
-<<<<<<< HEAD
-
-// var foursquareID = "IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1"
-// var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
-
-$.ajax({
-  dataType: "json",
-  url: "https://api.foursquare.com/v2/venues/explore?client_id=IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1&client_secret=MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL&near=DEN&v=20180323",
-  data: {},
-  success: function( data ) {
-    // Code for handling API response
-    console.log(data);
-  },
-  error: function(jqXHR, textStatus, errorThrown) {
-    // Code for handling errors
-  }
-});
-=======
 // modal
 const Modal = $('.modal')
 const ModalBg = $('.modal-background')
@@ -127,4 +109,3 @@ $('#Eventbtn').on("click", function() {
 ModalBg.on("click", function(){
   Modal.removeClass("is-active");
 });
->>>>>>> ebef61368167c0732079c042c3bf871ba1df275a

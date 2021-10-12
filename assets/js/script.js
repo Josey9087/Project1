@@ -97,3 +97,15 @@ $('#Pick').click(function () {
   // var foursquareID = "IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1"
   // var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
 })
+
+// modal
+const Modal = $('.modal')
+const ModalBg = $('.modal-background')
+
+$('#Eventbtn').on("click", function() {
+  Modal.addClass("is-active");
+});
+
+ModalBg.on("click", function(){
+  Modal.removeClass("is-active");
+});

@@ -4,8 +4,11 @@
 
 // var seatGeek = "4a649bd858de54c13c57fa3341d39a5858fd79d148f3fec66b521dea9a881bd1"
 // var seatGeekUrl = "https://api.seatgeek.com/2/events?geoid=80022&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0"
+
 LastData()
+
 $('#today').text("Today is: " + moment().format("MM/DD/YYYY"))
+
 $("#search").on("click", function () {
   var zipcode = $("#Zipput").val()
   console.log(zipcode)
@@ -90,7 +93,8 @@ $("#search").on("click", function () {
             for (var i = 0; i < 6; i++) {
               var Food = {
                 Name: data.response.groups[0].items[i].venue.name,
-                Location: data.response.groups[0].items[i].venue.location.address
+                Location: data.response.groups[0].items[i].venue.location.address,
+                Category: data.response.groups[0].items[i].venue.categories[0].shortName
               }
               localStorage.setItem("Food" + [i], JSON.stringify(Food))
               var AllFood = JSON.parse(localStorage.getItem("Food" + [i]));
@@ -101,6 +105,7 @@ $("#search").on("click", function () {
                     <div class="card-content">
                       <div class="content">${AllFood.Name}</div>
                       <div class="content">${AllFood.Location}</div>
+                      <div class="content">${AllFood.Category}</div>
                     </div>
                   </div>
                 </button>
@@ -122,6 +127,7 @@ $("#search").on("click", function () {
                           <div class="card-content">
                             <div class="content">${ChosenFood.Name}</div>
                             <div class="content">${ChosenFood.Location}</div>
+                            <div class="content">${ChosenFood.Category}</div>
                           </div>
                         </div>`)
             }}
@@ -166,23 +172,28 @@ function LastData() {
   $('#modal').empty()
   LastEvent = JSON.parse(localStorage.getItem('Chosen'))
   LastFood = JSON.parse(localStorage.getItem('ChosenFood'))
-  $('#modal').append(`
-  <div class="card">
-  <div class="card-content">
-    <div class="content">${LastEvent.Title}</div>
-    <div class="content">${LastEvent.Address}</div>
-    <div class="content">${LastEvent.Time}</div>
-    <a target="_blank" href="${LastEvent.Tickets}" class="content">Buy Tickets</a>
+  if(LastEvent!==null){
+    $('#modal').append(`
+    <div class="card">
+    <div class="card-content">
+      <div class="content">${LastEvent.Title}</div>
+      <div class="content">${LastEvent.Address}</div>
+      <div class="content">${LastEvent.Time}</div>
+      <a target="_blank" href="${LastEvent.Tickets}" class="content">Buy Tickets</a>
+    </div>
   </div>
-</div>
-<hr>
-  `)
-  $('#modal').append(`
-  <div class="card">
-  <div class="card-content">
-    <div class="content">${LastFood.Name}</div>
-    <div class="content">${LastFood.Location}</div>
+  <hr>
+    `)
+  }
+  if(LastFood!==null){
+    $('#modal').append(`
+    <div class="card">
+    <div class="card-content">
+      <div class="content">${LastFood.Name}</div>
+      <div class="content">${LastFood.Location}</div>
+      <div class="content">${LastFood.Category}</div>
+    </div>
   </div>
-</div>
-  `)
+    `)
+  }
 }

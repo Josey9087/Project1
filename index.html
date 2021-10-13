@@ -4,21 +4,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title class="title is-1">Kickin' it Back</title>
+  <title class="title is-1">Soundbites</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/style/style.css">
 </head>
 
 <body>
   <main>
-    <section class="hero is-primary is-fullheight">
+    <section class="hero is-link is-fullheight">
       <!-- Hero head: will stick at the top -->
       <div class="hero-head">
         <nav class="navbar">
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item">
-                <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo">
+                <p class="title">Soundbites</p>
                 <!-- we need to change this to either another picture/logo or maybe just a fun title imo -->
               </a>
               <span class="navbar-burger" data-target="navbarMenuHeroA">
@@ -29,7 +29,7 @@
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
               <div class="navbar-end">
-                <button id="Eventbtn" class="button is-primary">My Events</button>
+                <button id="Eventbtn" class="button is-link">My Events</button>
                 <!-- <a id="eventstab" class="navbar-item">
                   My Events
                 </a> -->
@@ -41,19 +41,17 @@
       <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container has-text-centered">
-          <p class="title">
-            Chillin' With the Homies
-          </p>
+          
           <p id="today" class="subtitle">
             Today is:
           </p>
           <p class="subtitle">
-            PLan the your fun
+            Search by Zipcode
             <input class="input is-large is-align-content-center" type="text" placeholder="Enter Your Zip" id="Zipput">
             <button id="search">Search</button>
           </p>
           <div id="Event-Cards" class="columns is-flex-wrap-wrap">
-           
+
           </div>
         </div>
       </div>
@@ -66,8 +64,7 @@
         <div class="modal-content">
           <div id="eventmodal" class="card">
             <div class="card-content">
-              <div class="content">
-                Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta gravida at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras mattis consectetur purus sit amet fermentum.
+              <div id="modal" class="content">
               </div>
             </div>
           </div>

@@ -1,7 +1,3 @@
-// var ticketmaster = "ma4xCtfbVX6HAL5AbR0JZjnhfwzzFMOy"
-// var ticketmasterURL = 'https://cors-anywhere.herokuapp.com/https://app.ticketmaster.com/discovery/v2/events.json?size=1&postalCode=80228&apikey=${ticketmaster}'
-// var sportsAPI = "cd6116b0-264b-11ec-b2e9-e52c4e87d97a"
-
 // var seatGeek = "4a649bd858de54c13c57fa3341d39a5858fd79d148f3fec66b521dea9a881bd1"
 // var seatGeekUrl = "https://api.seatgeek.com/2/events?geoid=80022&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0"
 
@@ -11,8 +7,6 @@ $('#today').text("Today is: " + moment().format("MM/DD/YYYY"))
 
 $("#search").on("click", function () {
   var zipcode = $("#Zipput").val()
-  console.log(zipcode)
-
   $.ajax({
     type: "GET",
     url: 'https://api.seatgeek.com/2/events?geoip=' + zipcode + '&per_page=6&listing_count.gt=0&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0',
@@ -20,7 +14,6 @@ $("#search").on("click", function () {
     dataType: "json",
   })
     .done(function (json) {
-      console.log(json);
       // Parse the response.
       // Do other things.
       $('#Event-Cards').empty()
@@ -36,7 +29,6 @@ $("#search").on("click", function () {
         };
         localStorage.setItem("Event" + [i], JSON.stringify(Next))
         var AllOptions = JSON.parse(localStorage.getItem("Event" + [i]));
-        console.log(AllOptions.Title)
         $('#Event-Cards').append(`
         <button data-key="${"Event" + [i]}"data-lat="${AllOptions.Lat}" data-lon="${AllOptions.Lon}" class="Pick column is-one-third">
                   <div class="card">
@@ -53,20 +45,15 @@ $("#search").on("click", function () {
       }
       $('.Pick').click(function (event) {
         var target = event.currentTarget
-        console.log(target.getAttribute('data-lat'))
         Lat = target.getAttribute('data-lat')
         Lon = target.getAttribute('data-lon')
         Key = target.getAttribute('data-key')
-        console.log(Lon)
-        console.log(Lat)
         $('#modal').empty()
         for (var i = 0; i < localStorage.length; i++) {
           Key1 = localStorage.key([i]);
-          console.log(Key1)
           if (Key == Key1) {
             localStorage.setItem('Chosen', localStorage.getItem(Key1))
             Chosen = JSON.parse(localStorage.getItem(Key1))
-            console.log(Chosen.Title)
             $('#modal').append(`
             <div class="card">
                     <div class="card-content">
@@ -77,7 +64,7 @@ $("#search").on("click", function () {
                     </div>
                   </div>
                   <hr>`)
-            console.log(localStorage.getItem(Key1))
+            break
           }
         }
         $('#Event-Cards').empty()
@@ -89,7 +76,6 @@ $("#search").on("click", function () {
         })
           .done(function (data) {
             // Code for handling API response
-            console.log(data);
             for (var i = 0; i < 6; i++) {
               var Food = {
                 Name: data.response.groups[0].items[i].venue.name,
@@ -98,7 +84,6 @@ $("#search").on("click", function () {
               }
               localStorage.setItem("Food" + [i], JSON.stringify(Food))
               var AllFood = JSON.parse(localStorage.getItem("Food" + [i]));
-              console.log(AllFood.Name)
               $('#Event-Cards').append(`
         <button data-key="${"Food" + [i]}" class="Food column is-one-third">
                   <div class="card">
@@ -117,11 +102,9 @@ $("#search").on("click", function () {
               FoodKey = target.getAttribute('data-key')
               for (var i = 0; i < localStorage.length; i++) {
                 FoodKey1 = localStorage.key([i]);
-                console.log(Key1)
                 if (FoodKey == FoodKey1) {
                   localStorage.setItem('ChosenFood', localStorage.getItem(FoodKey1))
                   ChosenFood = JSON.parse(localStorage.getItem(FoodKey1))
-                  console.log(ChosenFood.Name)
                   $('#modal').append(`
                   <div class="card">
                           <div class="card-content">
@@ -130,11 +113,14 @@ $("#search").on("click", function () {
                             <div class="content">${ChosenFood.Category}</div>
                           </div>
                         </div>`)
-            }}
-            $('#Event-Cards').empty()})
+                  break
+                }
+              }
+              $('#Event-Cards').empty()
+              $('#Event-Cards').append(
+                `<H1 class="title is-1">Check out My Events tab! Or Search a new Zipcode!</H1>`)
 
-//Beginning Modal for end display
-
+            })
           })
           .fail(function (jqXHR, textStatus, errorThrown) {
 
@@ -157,7 +143,6 @@ $("#search").on("click", function () {
 // modal
 const Modal = $('.modal')
 const ModalBg = $('.modal-background')
-
 $('#Eventbtn').on("click", function () {
   Modal.addClass("is-active");
 });
@@ -172,7 +157,7 @@ function LastData() {
   $('#modal').empty()
   LastEvent = JSON.parse(localStorage.getItem('Chosen'))
   LastFood = JSON.parse(localStorage.getItem('ChosenFood'))
-  if(LastEvent!==null){
+  if (LastEvent !== null) {
     $('#modal').append(`
     <div class="card">
     <div class="card-content">
@@ -185,7 +170,7 @@ function LastData() {
   <hr>
     `)
   }
-  if(LastFood!==null){
+  if (LastFood !== null) {
     $('#modal').append(`
     <div class="card">
     <div class="card-content">

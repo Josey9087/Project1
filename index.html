@@ -7,56 +7,49 @@
   <title class="title is-1">Soundbites</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
   <link rel="stylesheet" href="./assets/style/style.css">
+    <!-- started by linking bulma and our css after just in case we needed to add different class/id's -->
 </head>
 
 <body>
   <main>
+    <!-- We couldn't decide on how we wanted to make the page look once the user started to interact with it. 
+    So we went with a simpler route to avoid the page being too crowded. That's when I stumbled across a hero 
+    and how it was styled in bulma. It made things simpler and the page makes the user feel more welcomed. -->
     <section class="hero is-link is-fullheight">
-      <!-- Hero head: will stick at the top -->
       <div class="hero-head">
         <nav class="navbar">
           <div class="container">
             <div class="navbar-brand">
               <a class="navbar-item">
                 <p class="title">Soundbites</p>
-                <!-- we need to change this to either another picture/logo or maybe just a fun title imo -->
+    <!--We originally had plans to have more tabs but we didn't find specific data within the API to make those work. 
+    We plan on making a calendar or a journal with what the user chooses in the future.  -->
               </a>
-              <span class="navbar-burger" data-target="navbarMenuHeroA">
-                <span></span>
-                <span></span>
-                <span></span>
-              </span>
             </div>
             <div id="navbarMenuHeroA" class="navbar-menu">
               <div class="navbar-end">
                 <button id="Eventbtn" class="button is-link">My Events</button>
-                <!-- <a id="eventstab" class="navbar-item">
-                  My Events
-                </a> -->
               </div>
             </div>
-          </div>
         </nav>
       </div>
-      <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container has-text-centered">
           <p id="today" class="subtitle">
             Today is:
           </p>
+    <!-- Presented the user with the current date also -->
           <p class="subtitle">
             Search by Zipcode
             <input class="input is-large is-align-content-center" type="text" placeholder="Enter Your Zip" id="Zipput">
             <button id="search">Search</button>
           </p>
+    <!-- This section of the HTML in particular is where the magic happens. The JavaScript starts to work after the user inputs their zipcode -->
           <div id="Event-Cards" class="columns is-flex-wrap-wrap">
           </div>
         </div>
       </div>
-      <!-- Hero footer: will stick at the bottom -->
-      <div class="hero-foot">
-      </div>
-      <!-- modal -->
+
       <div class="modal">
         <div class="modal-background"></div>
         <div class="modal-content">
@@ -66,6 +59,9 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    <!-- the modal is where we stored the local storage of what the user selected and it is only displayed after clicking on "My Events" tab -->
     </section>
   </main>
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="

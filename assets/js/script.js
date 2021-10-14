@@ -1,21 +1,25 @@
-// var seatGeek = "4a649bd858de54c13c57fa3341d39a5858fd79d148f3fec66b521dea9a881bd1"
-// var seatGeekUrl = "https://api.seatgeek.com/2/events?geoid=80022&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0"
-
+// Activaates the function which displays the last chosen food and place in the My Events tab.
 LastData()
-
+// Displays today's date above the search bar.
 $('#today').text("Today is: " + moment().format("MM/DD/YYYY"))
-
+// Event listener for the search button to search by zipcode this triggers a function, followed by saving the zipcode as a variable.
 $("#search").on("click", function () {
   var zipcode = $("#Zipput").val()
+  // Below is the call to the SeatGeek API which is used to grab events near the zipcode. Parameters are set to get a maximum of 6 events during a call.
   $.ajax({
     type: "GET",
     url: 'https://api.seatgeek.com/2/events?geoip=' + zipcode + '&per_page=6&listing_count.gt=0&client_id=MjM3ODMwNDN8MTYzMzU2OTE4MC42OTA3NDk0',
     async: true,
     dataType: "json",
   })
+  // The code below activates when the call is successfull. It turns the response into the variable 'json' which is in json format.
+  // After it resets the Event-Cards to ensure nothing is displayed when displaying the new events.
+  // A for loop begins which runs 6 times in order to iterate through the response of the API call. A variable is created in order to save data from each.
+  // As the data is saved it is stringified before being placed into local stoarage.
+  // A new variable is set to the parsed array of objects currently looping in local storage.
+  // Jquery is used to grab the Event-Cards id and append html tags that contains the values of the objects from the new parsed variable.
     .done(function (json) {
       // Parse the response.
-      // Do other things.
       $('#Event-Cards').empty()
       for (var i = 0; i < 6; i++) {
         var Next = {
@@ -43,6 +47,12 @@ $("#search").on("click", function () {
                 <hr>
                 `)
       }
+      // A function that is activated when the tag with the class "Pick" is clicked.
+      // Variables are grabbed from the data attribues within the current clicked element.
+      // The modal is emptied out so that nothing is there before appending.
+      // A for loop begings that loops through everything in local storage and matches the name of the key to the name of the data-key attribute.
+      // When the if statment comparing each key name in the local storage comes out to be true it saves a new key containing all of the content of the currently looped local storage.
+      // The content is pulled out and then parsed in order to append html tags into the modal with values of the parsed content. The loop then breaks.
       $('.Pick').click(function (event) {
         var target = event.currentTarget
         Lat = target.getAttribute('data-lat')
@@ -67,6 +77,9 @@ $("#search").on("click", function () {
             break
           }
         }
+        // The tag that contains the Javascript is emptied out in order to append the new Food location options.
+        // A call is made to the FourSquare API using the latitude and longitude coordinates of the chosen event.
+        // Parameters are set to find food options and only display 6 options.
         $('#Event-Cards').empty()
         $.ajax({
           type: "GET",
@@ -74,6 +87,11 @@ $("#search").on("click", function () {
           url: 'https://api.foursquare.com/v2/venues/explore?client_id=IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1&client_secret=MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL&ll=' + Lat + ',' + Lon + '&section=food&limit=6&v=20180323',
           data: {}
         })
+        // // The code below activates when the call is successfull. It turns the response into the variable 'json' which is in json format.
+  // A for loop begins which runs 6 times in order to iterate through the response of the API call. A variable is created in order to save data from each.
+  // As the data is saved it is stringified before being placed into local stoarage.
+  // A new variable is set to the parsed array of objects currently looping in local storage.
+  // Jquery is used to grab the Event-Cards id and append html tags that contains the values of the objects from the new parsed variable.
           .done(function (data) {
             // Code for handling API response
             for (var i = 0; i < 6; i++) {
@@ -97,6 +115,11 @@ $("#search").on("click", function () {
                 <hr>
                 `)
             }
+                  // A function that is activated when the tag with the class "Food" is clicked.
+      // Variables are grabbed from the data attribues within the current clicked element.
+      // A for loop begings that loops through everything in local storage and matches the name of the key to the name of the data-key attribute.
+      // When the if statment comparing each key name in the local storage comes out to be true it saves a new key containing all of the content of the currently looped local storage.
+      // The content is pulled out and then parsed in order to append html tags into the modal with values of the parsed content. The loop then breaks.
             $('.Food').click(function (event) {
               var target = event.currentTarget
               FoodKey = target.getAttribute('data-key')
@@ -116,23 +139,20 @@ $("#search").on("click", function () {
                   break
                 }
               }
+              // The event card is emptied and in order to append a tag that displays "Check out My Events tab! Or Search a new Zipcode!</" 
               $('#Event-Cards').empty()
               $('#Event-Cards').append(
                 `<H1 class="title is-1">Check out My Events tab! Or Search a new Zipcode!</H1>`)
 
             })
           })
+          // On failure to call the FourSquare API
           .fail(function (jqXHR, textStatus, errorThrown) {
-
-
-            // Code for handling errors
+          // Code for handling errors
           });
-
-        // var foursquareID = "IUF2O13MUPZXUU1ALLEXY1PO4XJG2RSIBVBZUJDTL1VIDIE1"
-        // var foursquareKey = "MDHH5GDE5ILC3JKCOQS14BGKCDZPQBZ1XO3Y2WVU3XYELWNL"
       })
     })
-
+    // On failure to call the SeatGeek API
     .fail(function (xhr, status, err) {
       console.log("error")
       // This time, we do not end up here!
@@ -140,7 +160,7 @@ $("#search").on("click", function () {
 })
 
 
-// modal
+// Finds the class modal and class modal-background, on clicking the My Events tab the modal is displayed and upon clicking the background it closes.
 const Modal = $('.modal')
 const ModalBg = $('.modal-background')
 $('#Eventbtn').on("click", function () {
@@ -153,6 +173,9 @@ ModalBg.on("click", function () {
 
 //
 
+// The function that places the last chosen Event and Food location into the modal.
+// Finds the key Chosen and ChosenFood key in order to parse the content from local storage.
+// If those variables don't come out null then modal id has tags appended to it, those tags contain values of the parsed array from the local storage.
 function LastData() {
   $('#modal').empty()
   LastEvent = JSON.parse(localStorage.getItem('Chosen'))

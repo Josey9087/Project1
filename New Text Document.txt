@@ -1,9 +1,0 @@
-MVPS
-'
-- Audience  (students,employees ecxt)
-
-- A list of Project/Events
-
-- Alets for given Projects
-
-- 
